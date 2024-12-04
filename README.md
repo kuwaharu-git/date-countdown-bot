@@ -17,8 +17,8 @@
 1. リポジトリをクローンします。
 
    ```bash
-   git clone <リポジトリのURL>
-   cd <リポジトリ名>
+   git clone https://github.com/kuwaharu-git/date-countdown-bot.git
+   cd date-countdown-bot
    ```
 
 2. 必要なPythonパッケージをインストールします。
