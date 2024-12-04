@@ -13,8 +13,8 @@ CHANNEL_ID = int(os.getenv("CHANNEL_ID"))
 
 JST = timezone(timedelta(hours=+9), "JST")
 
-# 時刻をリストで設定
-times = [time(hour=7, tzinfo=JST)]
+# 配信時刻をリストで設定
+TIMES = [time(hour=7, tzinfo=JST)]
 
 
 # トークンを読み込む関数
@@ -52,6 +52,7 @@ def add_event(event_name, event_date):
 
     # 時間を7時に固定
     event_date = datetime.datetime.strptime(event_date, "%Y-%m-%d")
+    # 毎朝7時に通知するため、時間を7時に設定(配信時間を変更する場合はここを変更)
     event_date = event_date.replace(hour=7, minute=0, second=0, microsecond=0)
 
     events[event_id] = {
@@ -93,7 +94,7 @@ client = discord.Client(intents=intents)
 
 
 # 毎日午前7時に実行するタスク
-@tasks.loop(time=times)  # 毎日7時に実行
+@tasks.loop(time=TIMES)  # 毎日7時に実行
 async def send_event_notifications():
     channel = client.get_channel(CHANNEL_ID)
     if channel:
