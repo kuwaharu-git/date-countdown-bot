@@ -10,6 +10,7 @@ from datetime import time, timezone, timedelta
 load_dotenv()
 
 CHANNEL_ID = int(os.getenv("CHANNEL_ID"))
+ADMIN_CHANNEL_ID = int(os.getenv("ADMIN_CHANNEL_ID"))
 
 JST = timezone(timedelta(hours=+9), "JST")
 
@@ -119,7 +120,7 @@ async def on_ready():
 
     # チャンネルIDを指定してメッセージを送信
     channel = client.get_channel(
-        CHANNEL_ID
+        ADMIN_CHANNEL_ID
     )  # YOUR_CHANNEL_IDに実際のチャンネルIDを設定
     if channel:
         await channel.send("日付カウントダウンBotが起動しました。")

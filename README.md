@@ -32,6 +32,7 @@
    ```env
    DISCORD_TOKEN=あなたのDiscordボットのトークン
    CHANNEL_ID=通知を送信するチャンネルのID
+   ADMIN_CHANNEL_ID=起動時の通知を送信する管理者用チャンネルのID(CHANEL_IDと同じも可)
    ```
 
 4. Botを起動します：
