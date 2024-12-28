@@ -36,6 +36,15 @@ def get_unfinished_events() -> list:
     return events
 
 
+# 終了済みのイベントを取得
+@db_session
+def get_finished_events() -> list:
+    session = Session(bind=engine)
+    events = session.query(Event).filter(Event.is_finished == 1).all()
+    session.close()
+    return events
+
+
 # すべてのイベントを取得
 @db_session
 def get_all_events() -> list:
