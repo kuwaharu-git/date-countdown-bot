@@ -8,6 +8,7 @@ from create_table import create_table
 from app.crud import (
     create_event,
     get_unfinished_events,
+    get_finished_events,
     update_event_finished,
     delete_event,
 )
@@ -158,6 +159,22 @@ async def on_message(message):
                     event_date = row.event_date
                     days_left = get_countdown(event_date)
                     await message.channel.send(f"{event_name}まであと{days_left}日")
+    # 終了済みイベント表示コマンド
+    if message.content.startswith("!list_finished_events"):
+        result = get_finished_events()
+        if result == "error":
+            await message.channel.send("エラーが発生しました。")
+        else:
+            if result == []:
+                await message.channel.send("終了済みのイベントはありません。")
+            else:
+                for row in result:
+                    event_id = row.id
+                    event_name = row.event_name
+                    event_date = row.event_date
+                    await message.channel.send(
+                        f"ID: {event_id}, イベント名: {event_name}, 日付: {event_date}"
+                    )
 
 
 def main():
